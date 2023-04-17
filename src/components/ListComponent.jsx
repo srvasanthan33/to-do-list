@@ -21,14 +21,12 @@ function Time() {
 }
 
 function TaskManager() {
-    const [tasks, Addtask] = useState([
-        { id: 1, name: "Buy Groceries", status: "Not Finished" },
-        { id: 2, name: "Read Book", status: "Finished" }
-    ]);
+    const [tasks, Addtask] = useState([]);
+    // { id: 0, name: "Buy Groceries", status: "Not Finished" }
 
     const [TaskName, setTaskName] = useState();
     const [StatusName, setStatusName] = useState("Not Finished");
-    const [TaskId, setTaskId] = useState(3);
+    const [TaskId, setTaskId] = useState(1);
 
     const AddTaskHandler = event => {
         event.preventDefault();
@@ -40,7 +38,9 @@ function TaskManager() {
         setTaskId(previous => {
             return previous + 1;
         });
-        console.log(tasks);
+        setTaskName("");
+
+        //console.log(tasks);
     };
     function TaskNameHandler(event) {
         setTaskName(event.target.value);
@@ -48,13 +48,29 @@ function TaskManager() {
     function OptionHandler(event) {
         setStatusName(event.target.value);
     }
+    function DeleteHandler(event) {
+        let taskID = event.target.id;
+        let del_ind = 0;
+        for (let i in tasks) {
+            if (tasks[i].id == taskID) {
+                del_ind = i;
+            }
+        }
+        console.log(del_ind);
+        Addtask(function (k) {
+            return k.filter(function (e) {
+                return e.id != taskID;
+            });
+        });
+        //deleting the particular task using filter
+    }
 
     return (
         <div>
             <form onSubmit={AddTaskHandler}>
                 <legend>Add Task</legend>
-                <input type="text" placeholder="Enter Task Name" required onChange={TaskNameHandler} />
-                <select onChange={OptionHandler}>
+                <input value={TaskName} type="text" placeholder="Enter Task Name" required onChange={TaskNameHandler} />
+                <select value={StatusName} onChange={OptionHandler}>
                     <option value="Not Finished">Not Finished</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Finished">Finished</option>
@@ -68,15 +84,21 @@ function TaskManager() {
                         <tr>
                             <th>Name</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {tasks.map(ele => {
                             return (
-                                <tr key={ele.id}>
+                                <tr className="TASK" key={ele.id}>
                                     <td>{ele.name}</td>
-                                    <td>{ele.status}</td>
+                                    <td className="taskstatus">{ele.status}</td>
+                                    <td>
+                                        <button id={ele.id} onClick={DeleteHandler} key={ele.id}>
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             );
                         })}
