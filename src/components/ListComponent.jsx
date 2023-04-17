@@ -38,23 +38,33 @@ function TaskManager() {
             <form onSubmit={AddTaskHandler}>
                 <legend>Add Task</legend>
                 <input type="text" placeholder="Enter Task Name" />
+                <select>
+                    <option value="Not Finished">Not Finished</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Finished">Finished</option>
+                </select>
                 <button>Add</button>
             </form>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                </tr>
-                {tasks.map(ele => {
-                    return (
-                        <tr>
-                            <td>{ele.name}</td>
-                            <td>{ele.status}</td>
-                        </tr>
-                    );
-                })}
-            </table>
-            <ul></ul>
+
+            <div className="taskList">
+                <table>
+                    <tr>
+                        <th>S.no</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                    </tr>
+
+                    {tasks.map(ele => {
+                        return (
+                            <tr>
+                                <td></td>
+                                <td>{ele.name}</td>
+                                <td>{ele.status}</td>
+                            </tr>
+                        );
+                    })}
+                </table>
+            </div>
         </div>
     );
 }
