@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import ToDoComponent from "./components/ToDoComponent";
+import ListComponent from "./components/ListComponent";
+
 function App() {
     return (
         <div className="App">
@@ -8,7 +10,7 @@ function App() {
                 <h1>To-Do-List</h1>
             </div>
             <div className="section">
-                <ToDoComponent />
+                <ListComponent />
             </div>
         </div>
     );

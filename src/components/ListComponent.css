@@ -1,0 +1,13 @@
+/*  */
+table {
+    margin: 40px 0px;
+    font-size: 20px;
+    border-collapse: collapse;
+}
+
+table,
+td,
+th {
+    border: 2px solid black;
+    padding: 3px;
+}
