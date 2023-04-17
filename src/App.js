@@ -8,6 +8,7 @@ function App() {
         <div className="App">
             <div className="header">
                 <h1>To-Do-List</h1>
+                <h4>by Vasanthan</h4>
             </div>
             <div className="section">
                 <ListComponent />

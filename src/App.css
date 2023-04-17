@@ -8,7 +8,9 @@
     padding: 45px;
     text-align: center;
 }
-
+.header h4 {
+    text-align: right;
+}
 .section {
     margin: 45px;
     width: 400px;

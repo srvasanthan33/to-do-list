@@ -1,6 +1,13 @@
 /*  */
 form {
     font-size: 20px;
+    width: 600px;
+}
+input[type="text"],
+select,
+button {
+    font-size: 15px;
+    padding: 10px 20px;
 }
 table {
     margin: 40px 0px;

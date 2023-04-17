@@ -21,24 +21,40 @@ function Time() {
 }
 
 function TaskManager() {
-    const AddTaskHandler = event => {
-        event.preventDefault();
-        Addtask(prev => {
-            return prev.concat({ id: 3, name: "Written Notes", status: "Progress" });
-        });
-    };
-
     const [tasks, Addtask] = useState([
         { id: 1, name: "Buy Groceries", status: "Not Finished" },
         { id: 2, name: "Read Book", status: "Finished" }
     ]);
 
+    const [TaskName, setTaskName] = useState();
+    const [StatusName, setStatusName] = useState("Not Finished");
+    const [TaskId, setTaskId] = useState(3);
+
+    const AddTaskHandler = event => {
+        event.preventDefault();
+        Addtask(prev => {
+            return prev.concat({ id: TaskId, name: TaskName, status: StatusName });
+        });
+
+        //To increment the taskid
+        setTaskId(previous => {
+            return previous + 1;
+        });
+        console.log(tasks);
+    };
+    function TaskNameHandler(event) {
+        setTaskName(event.target.value);
+    }
+    function OptionHandler(event) {
+        setStatusName(event.target.value);
+    }
+
     return (
         <div>
             <form onSubmit={AddTaskHandler}>
                 <legend>Add Task</legend>
-                <input type="text" placeholder="Enter Task Name" />
-                <select>
+                <input type="text" placeholder="Enter Task Name" required onChange={TaskNameHandler} />
+                <select onChange={OptionHandler}>
                     <option value="Not Finished">Not Finished</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Finished">Finished</option>
@@ -48,21 +64,23 @@ function TaskManager() {
 
             <div className="taskList">
                 <table>
-                    <tr>
-                        <th>S.no</th>
-                        <th>Name</th>
-                        <th>Status</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
 
-                    {tasks.map(ele => {
-                        return (
-                            <tr>
-                                <td></td>
-                                <td>{ele.name}</td>
-                                <td>{ele.status}</td>
-                            </tr>
-                        );
-                    })}
+                    <tbody>
+                        {tasks.map(ele => {
+                            return (
+                                <tr key={ele.id}>
+                                    <td>{ele.name}</td>
+                                    <td>{ele.status}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
                 </table>
             </div>
         </div>
